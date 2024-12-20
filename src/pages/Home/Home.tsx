@@ -19,7 +19,6 @@ function Home() {
     // @ts-expect-error This is a hack to check if the user agent is iOS
     const isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
     const fallbackUrl = isiOS ? APP_STORE_URL : isAndroid ? PLAY_STORE_URL : QP_PAGE
-    navigation(APP_STORE_URL)
 
     // Deep Link
     if (isAndroid || isiOS) {

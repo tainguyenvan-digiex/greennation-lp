@@ -4,6 +4,7 @@ import { QRCode } from 'react-qrcode-logo'
 import { Logo } from '../../assets/icons/Logo.tsx'
 import { GreenNationLogo } from '../../assets/icons/GreenNationLogo.tsx'
 import Footer from '../../components/Footer.tsx'
+import { path } from '../../constants/path.ts'
 
 function App() {
   const [prevScrollPos, setPrevScrollPos] = useState(0)
@@ -48,7 +49,7 @@ function App() {
       <div className={'bg-white -mb-[290px] pb-[290px] px-2 pt-10 md:pt-0 md:px-0'}>
         <div className={'h-[100vh] text-center flex items-center justify-center flex-col'}>
           <QRCode
-            value='https://store.greennation.green/'
+            value={path.home}
             size={415}
             qrStyle={'fluid'}
             logoImage={'./gn-logo.png'}
