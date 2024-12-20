@@ -11,13 +11,13 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
-  html {
+  .zoom {
     zoom: 0.9;
   }
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-width: 1200px) {
-  html {
+  .zoom {
     zoom: 0.8;
   }
 }
