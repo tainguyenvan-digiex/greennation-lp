@@ -1,51 +1,70 @@
+import { twMerge } from 'tailwind-merge'
+import { useEffect, useState } from 'react'
+import { QRCode } from 'react-qrcode-logo'
+import { GreenNationLogo } from './assets/icons/GreenNationLogo.tsx'
+import Footer from './components/Footer.tsx'
+import { Logo } from './assets/icons/Logo.tsx'
+
 function App() {
+  const [prevScrollPos, setPrevScrollPos] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY
+      setPrevScrollPos(currentScrollPos)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [prevScrollPos])
+
   return (
-    <div>
-      <form>
-        <div className='mb-6'>
-          <label htmlFor='email' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
-            Your email
-          </label>
-          <input
-            type='email'
-            id='email'
-            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-            placeholder='name@flowbite.com'
-            required
-          />
-        </div>
-        <div className='mb-6'>
-          <label htmlFor='password' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
-            Your password
-          </label>
-          <input
-            type='password'
-            id='password'
-            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-            required
-          />
-        </div>
-        <div className='flex items-start mb-6'>
-          <div className='flex items-center h-5'>
-            <input
-              id='remember'
-              type='checkbox'
-              className='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800'
-              required
-            />
-          </div>
-          <label htmlFor='remember' className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-            Remember me
-          </label>
-        </div>
-        <button
-          type='submit'
-          className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+    <main className={twMerge('font-poppins')}>
+      <div className='fixed top-0 z-[100] w-full'>
+        <div
+          className={twMerge('relative z-[100]', prevScrollPos ? 'backdrop-blur-[15px]' : 'backdrop-blur-[3px]')}
+          style={{ background: 'transparent' }}
         >
-          Submit
-        </button>
-      </form>
-    </div>
+          <div className='container mx-auto flex w-full items-center justify-between px-4 pt-5 lg:px-0 lg:pb-5 lg:pt-6 custom_xl:max-w-[1376px] custom_xxl:max-w-[1400px]'>
+            <div className='flex shrink cursor-pointer items-center gap-[9px]'>
+              <Logo className='h-[19.329px] w-[19.329px] lg:h-[30px] lg:w-[30px] custom_xl:h-[40px] custom_xl:w-[40px]' />
+
+              <div className='block'>
+                <GreenNationLogo
+                  color='black'
+                  className='w-[143.732px] lg:w-[200px] xl:w-[221.128px] custom_xl:w-[290px]'
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={'bg-white -mb-[290px] pb-[290px] px-2 pt-10 md:pt-0 md:px-0'}>
+        <div className={'h-[100vh] text-center flex items-center justify-center flex-col'}>
+          <QRCode
+            value='https://store.greennation.green/'
+            size={415}
+            qrStyle={'fluid'}
+            logoImage={'./gn-logo.png'}
+            logoWidth={120}
+            logoHeight={120}
+            bgColor={'#ffffff'}
+            eyeRadius={30}
+            eyeColor={'#43E8B3'}
+          />
+          <h1 className={'text-[23px] md:text-[56px] font-bold text-center mt-[50px] md:mt-[115px]'}>
+            Utilisez votre téléphone pour ouvrir le lien.
+          </h1>
+          <p className={'text-[14px] md:text-[26px] text-center'}>
+            Scannez le code QR ou ouvrez la page sur votre téléphone et cliquez sur le bouton pour aller sur l’app Green
+            Nation.
+          </p>
+        </div>
+      </div>
+      <Footer />
+    </main>
   )
 }
 
